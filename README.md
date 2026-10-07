@@ -2,7 +2,9 @@
 
 > **See beyond the message. Verify the identity.**
 
-UNMASK AI is a multimodal cybersecurity verification system that analyzes suspicious digital communications such as documents, images, URLs, phone numbers, and QR codes. It extracts evidence, checks identity/contact consistency, detects social-engineering signals, calculates a deterministic risk level, and uses Gemini AI to provide an evidence-based explanation and safer recommended action.
+UNMASK AI is an AI-powered cybersecurity verification platform that analyzes suspicious digital communications and helps users understand potential impersonation and scam signals through evidence-based verification.
+
+UNMASK AI inspects digital artifacts—including PDF documents, screenshots, raster images, URLs, phone numbers, and QR codes—extracting structural evidence, cross-referencing contact and identity consistency, detecting social-engineering triggers, computing deterministic risk scores, and generating clear, evidence-backed security guidance powered by Google Gemini AI.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.1-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
@@ -14,66 +16,74 @@ UNMASK AI is a multimodal cybersecurity verification system that analyzes suspic
 
 ---
 
-## 1. Problem
+## 1. UNMASK AI Overview
 
-Modern digital communications—such as PDF invoices, notification screenshots, scanned notices, and image attachments—are primary entry points for social engineering and impersonation attacks.
-
-Key challenges in digital threat verification include:
-* **Multi-Format Delivery**: Scams arrive across PDFs, screenshots, raster images, embedded QR codes, URLs, and phone numbers.
-* **Organizational Impersonation**: Attackers masquerade as legitimate financial institutions, delivery services, and service providers using official logos and brand names.
-* **Hidden Evidence**: Critical indicators like support hotlines, domain URLs, and QR code destinations are embedded inside documents and images rather than plain text.
-* **Inadequate Binary Answers**: Simple "scam / not scam" classifications lack transparency, contextual detail, and verification proof.
-* **Lack of Actionable Guidance**: Users need understandable evidence and a clear, safer next action to avoid taking bait.
+UNMASK AI addresses the growing risk of digital impersonation and social-engineering attacks delivered via unstructured documents and digital media. Rather than providing an opaque binary classification ("safe" or "scam"), UNMASK AI provides a transparent breakdown of extracted evidence, identity mismatches, risk severity scoring, and actionable safety recommendations.
 
 ---
 
-## 2. Solution
+## 2. Problem
 
-UNMASK AI approaches digital threat analysis through a core security philosophy:
+Modern digital communications—such as PDF invoices, payment receipts, notification screenshots, scanned notices, and image attachments—are primary vectors for phishing and impersonation attacks.
+
+Key challenges in digital threat analysis include:
+* **Multi-Format Delivery**: Threats arrive across PDFs, screenshots, image files, embedded QR codes, web URLs, and phone numbers.
+* **Organizational Impersonation**: Attackers masquerade as legitimate financial institutions, delivery services, and service providers using official logos and brand names.
+* **Embedded Evidence**: Critical risk indicators—such as support phone numbers, domain URLs, and QR code destinations—are embedded inside documents and images rather than plain body text.
+* **Inadequate Binary Classifications**: Simple "scam / not scam" outputs lack contextual evidence, verification proof, and user trust.
+* **Lack of Actionable Guidance**: Users require clear evidence and a safer recommended next step to avoid taking harmful action.
+
+---
+
+## 3. Solution
+
+UNMASK AI structures digital threat verification around a four-stage security framework:
 
 $$\text{Evidence} \longrightarrow \text{Verification} \longrightarrow \text{Explanation} \longrightarrow \text{Action}$$
 
 The system performs automated analysis across five core layers:
-1. **Evidence Extraction**: Extracts structural text, contact phone numbers, URLs, and embedded QR codes from documents and images.
-2. **Consistency Verification**: Cross-checks extracted contact information and domains against reference data.
-3. **Signal Detection**: Identifies coercive framing, urgency language, credential verification requests, and payment prompts.
-4. **Deterministic Scoring**: Calculates a transparent risk score and risk category (`SAFE`, `SUSPICIOUS`, `HIGH RISK`).
-5. **AI Explanation & Action**: Uses Google Gemini to explain findings in human terms and recommend safer next steps.
+1. **Evidence Extraction**: Parses text, phone numbers, URLs, and embedded QR codes from documents and images.
+2. **Consistency Verification**: Cross-references extracted contact numbers and web domains against reference identity data.
+3. **Signal Detection**: Identifies social-engineering patterns such as urgency language, credential prompts, and direct payment requests.
+4. **Deterministic Risk Scoring**: Computes an objective risk score and categorizes risk into `SAFE`, `SUSPICIOUS`, or `HIGH RISK`.
+5. **AI-Powered Explanation & Guidance**: Uses Google Gemini AI to synthesize evidence into non-technical explanations and concrete recommended actions.
 
 ---
 
-## 3. Key Features
+## 4. Key Features
 
-* **Document & Image Analysis**: Processes digital PDF documents and common image formats (`PNG`, `JPG`, `JPEG`).
-* **OCR Text Extraction**: Employs Tesseract OCR for text extraction from scanned documents and raster images.
-* **PDF Text Extraction**: Uses PyMuPDF (`fitz`) for fast text and layout parsing from native PDF files.
-* **Phone Number Extraction & Verification**: Extracts global contact numbers and checks consistency against registered organization numbers.
+* **Multi-Format Document Processing**: Analyzes digital PDF documents and common image formats (`PNG`, `JPG`, `JPEG`).
+* **OCR Text Extraction**: Employs Tesseract OCR to extract text from scanned documents, screenshots, and rasterized images.
+* **PDF Structural Parsing**: Uses PyMuPDF (`fitz`) for fast, native text extraction from digital PDF documents.
+* **Phone Number Extraction & Verification**: Parses global contact numbers and checks consistency against registered organization contacts.
 * **URL & Domain Analysis**: Extracts embedded links, parses hostnames, and checks domain consistency and structural anomalies.
-* **QR Code Detection & Parsing**: Uses OpenCV (`cv2`) to detect and decode embedded single or multi-QR code destinations.
-* **Organization / Entity Extraction**: Detects claimed organization names in document text.
-* **Social-Engineering Detection**: Identifies high-pressure urgency language, credential prompts, and payment transfer requests.
-* **Deterministic Risk Scoring**: Applies rule-based scoring to prevent AI hallucination from determining risk severity.
-* **Gemini AI Evidence-Based Explanation**: Generates structured, transparent security summaries and key findings using the Google Gemini API.
-* **Standardized Risk Categories**: Evaluates threats into clear `SAFE`, `SUSPICIOUS`, and `HIGH RISK` buckets.
-* **UNVERIFIED Identity Handling**: Treats unknown entities as unverified without falsely labeling them malicious.
-* **Fallback AI Provider**: Includes a local mock reasoning provider for offline testing or when an API key is unconfigured.
-* **Interactive Results & History UI**: Web interface built with Next.js displaying evidence cards, verification matrices, link breakdowns, and scan history.
+* **QR Code Detection & Parsing**: Uses OpenCV (`cv2`) to detect and decode single or multi-QR code destinations embedded in media.
+* **Organization & Entity Extraction**: Identifies claimed organization names from document headers and body text.
+* **Social-Engineering Detection**: Detects high-pressure urgency framing, account credential verification prompts, and payment transfer requests.
+* **Deterministic Risk Engine**: Evaluates rule-based logic to score severity without relying on AI model outputs for risk categorization.
+* **Gemini AI Evidence Explanation**: Generates structured, human-readable security reports, key findings, and recommended next steps using the Google Gemini API.
+* **Standardized Risk Levels**: Classifies analyzed communications into clear `SAFE`, `SUSPICIOUS`, and `HIGH RISK` categories.
+* **Neutral Handling of Unknown Entities**: Marks unlisted entities as `UNVERIFIED` rather than assuming malice without supporting evidence.
+* **Resilient AI Provider Architecture**: Includes a local mock reasoning provider for offline testing and automatic fallback when an API key is unconfigured.
+* **Interactive Frontend Dashboard**: Next.js user interface featuring interactive dropzones, verification breakdown matrices, link analysis tables, and scan history logs.
 
 ---
 
-## 4. How It Works
+## 5. How It Works
 
 ### Analysis Pipeline
 
-1. **Input**: User uploads a PDF document or image file (`PNG`, `JPG`, `JPEG`).
-2. **Text & Evidence Extraction**: PDF text is parsed natively via PyMuPDF; image text is extracted via Tesseract OCR; QR codes are decoded via OpenCV.
-3. **Contact / URL / QR Analysis**: Regex and parsing routines extract phone numbers, URLs, domain names, and QR destinations.
-4. **Verification**: Extracted entities are cross-checked against available trusted reference data.
-5. **Risk Scoring**: The deterministic risk engine evaluates rules (mismatches, urgency, lookalikes) to compute a score.
-6. **Gemini Reasoning**: Structured evidence payload is passed to Gemini AI (or local fallback) to formulate a clear, non-technical report.
-7. **Recommended Action**: Actionable recommendations are delivered to help the user handle the communication safely.
+1. **Input**: The user uploads a PDF document or image file (`PNG`, `JPG`, `JPEG`) through the web dashboard or API.
+2. **Text & Evidence Extraction**: Native PDF text is extracted via PyMuPDF; image text is extracted via Tesseract OCR; QR codes are decoded using OpenCV.
+3. **Contact / URL / QR Parsing**: Regex and parsing services isolate phone numbers, URLs, domain names, and QR destinations.
+4. **Verification**: Extracted entities are cross-checked against reference registry data.
+5. **Risk Scoring**: The deterministic risk engine evaluates rules (contact mismatches, domain mismatches, lookalike patterns, urgency triggers) to compute a score.
+6. **Gemini AI Reasoning**: Structured evidence payloads are transmitted to Gemini AI (or the local fallback provider) to generate a clear security summary.
+7. **Recommended Action**: Actionable guidance is displayed to assist the user in handling the communication safely.
 
-### System Architecture
+---
+
+## 6. System Architecture
 
 ```mermaid
 graph TD
@@ -88,72 +98,82 @@ graph TD
     Action --> UI[Results UI]
 ```
 
+### Module Responsibilities
+
+* **`document_parser.py`**: Manages PyMuPDF PDF parsing and coordinates image conversion for OCR.
+* **`ocr_service.py`**: Interacts with the Tesseract OCR executable to extract text from images.
+* **`qr_service.py`**: Executes OpenCV `QRCodeDetector` routines to extract embedded QR destinations.
+* **`entity_extractor.py`**: Parses phone numbers, web URLs, social-engineering keywords, and organization names.
+* **`verification_service.py`**: Cross-checks extracted contact items against identity reference data.
+* **`risk_engine.py`**: Evaluates deterministic security rules and computes the final risk level and payload.
+* **`ai_reasoning_service.py`**: Interfaces with the Google Gemini API (`google-genai` SDK) to produce human-readable security assessments.
+
 ---
 
-## 5. Risk Assessment
+## 7. Risk Assessment
 
-The deterministic risk engine calculates risk scores objectively by evaluating rule-based indicators:
+The deterministic risk engine evaluates rule-based indicators to compute objective risk scores:
 
-| Signal Category | Signal Trigger | Score Weight |
+| Category | Indicator / Trigger | Score Weight |
 | :--- | :--- | :--- |
 | **Contact Mismatch** | Extracted phone number conflicts with official organization contact | +3 |
 | **Domain Mismatch** | Extracted domain conflicts with official organization domain | +3 |
-| **QR Destination Mismatch** | QR code URL destination conflicts with official domain | +3 |
+| **QR Destination Mismatch** | QR code destination URL conflicts with official organization domain | +3 |
 | **Lookalike Domain** | Domain resembles official domain with subtle variations | +2 |
-| **Payment / Transfer Request** | Message prompts for fund transfers or financial payments | +2 |
-| **Credential Request** | Message prompts to verify passwords or account details | +2 |
-| **Urgency Framing** | High-pressure language demanding immediate action | +1 |
-| **URL Structural Anomaly** | IP-based hostname, excessive subdomains, or suspicious TLD | +1 |
-| **Verified Contact** | Phone number matches official registered contact | -1 |
-| **Verified Domain** | Domain matches official registered domain | -1 |
-| **Verified QR** | QR destination matches official registered domain | -1 |
+| **Payment / Transfer Request** | Document prompts for direct wire transfer or financial payment | +2 |
+| **Credential Request** | Document prompts for password or account credential confirmation | +2 |
+| **Urgency Framing** | High-pressure language demanding immediate recipient action | +1 |
+| **URL Structural Anomaly** | Hostname uses IP address, excessive subdomains, or suspicious TLD | +1 |
+| **Verified Contact** | Phone number matches official registered organization contact | -1 |
+| **Verified Domain** | Domain matches official registered organization domain | -1 |
+| **Verified QR** | QR destination matches official registered organization domain | -1 |
 
 ### Risk Categories
 
-* **SAFE** (Score $\le 2$): Low-risk indicators; communication details are consistent with reference data.
-* **SUSPICIOUS** (Score $3 - 5$): Unverified links, urgency language, or unknown entity contact details present.
-* **HIGH RISK** (Score $\ge 6$): Confirmed contact/domain mismatches, lookalike domains, or coercive credential/payment demands.
+* **SAFE** (Score $\le 2$): Low-risk indicators; communication details align with reference parameters.
+* **SUSPICIOUS** (Score $3 - 5$): Unverified links, urgency framing, or unconfirmed contact details present.
+* **HIGH RISK** (Score $\ge 6$): Confirmed contact/domain mismatches, lookalike domain patterns, or coercive payment/credential demands.
 
-> **Role of Gemini AI**: Google Gemini **does not** compute or alter the deterministic risk score or level. It receives the structured evidence payload to generate human-readable explanations, key findings summaries, and recommended actions.
+> **Role of Gemini AI**: Google Gemini **does not** determine or alter the deterministic risk score or level. It receives structured evidence to provide transparent, non-technical explanations of the underlying findings.
 
 ---
 
-## 6. Verification Philosophy
+## 8. Verification Philosophy
 
-UNMASK AI uses four distinct status classifications for extracted entities:
+UNMASK AI applies four standardized status classifications to extracted entities:
 
-* **VERIFIED**: Supporting reference data confirms that the extracted contact or domain matches the claimed organization.
+* **VERIFIED**: Official reference data confirms that the extracted contact or domain matches the claimed organization.
 * **MISMATCH**: The extracted phone number, domain, or QR destination explicitly conflicts with registered official details for the claimed entity.
-* **SUSPICIOUS**: Multiple risk indicators (such as urgency or suspicious URL structures) are present.
+* **SUSPICIOUS**: Multiple risk signals (such as urgency language or suspicious URL structures) are detected without matching reference credentials.
 * **UNVERIFIED**: Insufficient reference data is available to confirm or disprove legitimacy.
 
 > **"UNMASK AI does not treat unknown information as malicious."**
 
-### Registry Scope Notice
-The trusted organization registry (`backend/app/data/trusted_organizations.json`) included in this repository is a **demo/local registry** provided for hackathon evaluation and technical demonstration. It does not represent a real-world universal authority.
+### Reference Registry Notice
+The trusted organization registry (`backend/app/data/trusted_organizations.json`) in this repository is a **demo/local reference dataset** configured for testing and system evaluation. It does not represent a universal real-world identity authority.
 
 ---
 
-## 7. AI Integration
+## 9. AI Integration
 
-The Gemini AI integration in UNMASK AI operates with strict boundaries:
+The Google Gemini integration in UNMASK AI operates within strict architectural boundaries:
 
-* **Structured Evidence Inputs**: Gemini receives structured JSON evidence (extracted entities, verification results, social-engineering flags, risk scores) rather than raw uploaded files.
-* **Validated JSON Output**: Gemini outputs a validated JSON schema (`AIAssessment`) containing:
-  * `headline`: Brief security status title.
-  * `summary`: Overview of the security findings.
-  * `key_findings`: Bulleted list of evidence findings.
-  * `confidence`: Assessment confidence rating (`high`, `medium`, `low`).
+* **Structured Data Inputs**: Gemini receives structured JSON evidence payloads (extracted entities, verification states, social-engineering flags, risk scores) rather than raw uploaded files.
+* **Validated JSON Output**: Gemini returns a validated JSON schema (`AIAssessment`) containing:
+  * `headline`: Concise security status title.
+  * `summary`: Overview of findings.
+  * `key_findings`: Itemized list of security observations.
+  * `confidence`: Assessment confidence level (`high`, `medium`, `low`).
   * `recommended_action`: Actionable next steps for the user.
-  * `reasoning_basis`: Transparent list of evidence points supporting the explanation.
-* **Server-Side Security**: Gemini API calls are executed strictly on the backend; API keys are never exposed to the frontend browser client.
-* **Resilient Fallback**: A local `MockReasoningProvider` automatically handles evaluations if `GEMINI_API_KEY` is not provided or if API quota limits are hit.
+  * `reasoning_basis`: Itemized evidence points supporting the explanation.
+* **Server-Side Key Isolation**: Gemini API requests originate strictly from the backend server; API keys are never exposed to client-side code.
+* **Resilient Fallback**: A local `MockReasoningProvider` executes automatically if `GEMINI_API_KEY` is omitted or unavailable.
 
-*Architectural Scope Note*: UNMASK AI does **not** use RAG (Retrieval-Augmented Generation), vector databases, autonomous agent loops, or direct raw file uploads to the Gemini API.
+*Architectural Scope Note*: UNMASK AI does **not** employ RAG (Retrieval-Augmented Generation), vector databases, autonomous agent loops, or direct raw file streaming into the Gemini model.
 
 ---
 
-## 8. Technology Stack
+## 10. Technology Stack
 
 ### Frontend
 * **Framework**: [Next.js](https://nextjs.org/) (v15.1)
@@ -163,21 +183,21 @@ The Gemini AI integration in UNMASK AI operates with strict boundaries:
 
 ### Backend
 * **API Framework**: [FastAPI](https://fastapi.tiangolo.com/) (v0.115)
-* **Server**: [Uvicorn](https://www.uvicorn.org/) (v0.30)
+* **Web Server**: [Uvicorn](https://www.uvicorn.org/) (v0.30)
 * **Language**: [Python](https://www.python.org/) (3.10+)
 * **Data Validation**: [Pydantic](https://docs.pydantic.dev/) (v2.8) & `pydantic-settings`
 
-### AI & Document / Vision Processing
+### AI & Vision Processing
 * **AI Model API**: [Google Gemini API](https://ai.google.dev/) (`google-genai` v2.0 SDK)
 * **OCR Engine**: [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) (`pytesseract`)
 * **PDF Parser**: [PyMuPDF](https://pymupdf.readthedocs.io/) (`fitz`)
 * **Computer Vision**: [OpenCV](https://opencv.org/) (`opencv-python-headless`) for QR detection
 * **Image Utilities**: [Pillow](https://python-pillow.org/) (`PIL`)
-* **Phone Verification**: `phonenumbers`
+* **Phone Parsing**: `phonenumbers`
 
 ---
 
-## 9. Project Structure
+## 11. Project Structure
 
 ```
 UNMASK-AI/
@@ -247,16 +267,16 @@ UNMASK-AI/
 
 ---
 
-## 10. Getting Started
+## 12. Getting Started
 
 ### Prerequisites
 
-Ensure the following tools are installed on your environment:
+Ensure the following tools are installed in your environment:
 * **Node.js**: v18.0 or higher
 * **Python**: v3.10 or higher
 * **Git**: latest
-* **Tesseract OCR**: Recommended for image OCR support ([UB-Mannheim Tesseract Releases](https://github.com/UB-Mannheim/tesseract/wiki)).
-  * *Note: Text-based PDFs process natively without Tesseract.*
+* **Tesseract OCR**: Recommended for image OCR processing ([UB-Mannheim Tesseract Releases](https://github.com/UB-Mannheim/tesseract/wiki)).
+  * *Note: Text-based PDFs process natively without requiring Tesseract.*
 
 ### 1. Repository Setup
 
@@ -267,7 +287,7 @@ cd UNMASK-AI
 
 ### 2. Backend Setup
 
-Navigate to the `backend` directory, set up a virtual environment, and install requirements:
+Navigate to the `backend` directory, create a virtual environment, and install dependencies:
 
 ```bash
 cd backend
@@ -285,7 +305,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Configure backend environment variables by copying `.env.example` to `.env`:
+Create a backend environment file by copying `.env.example`:
 
 ```bash
 cp .env.example .env
@@ -297,11 +317,11 @@ Start the FastAPI development server:
 uvicorn app.main:app --reload --port 8000
 ```
 
-The API will be available at `http://localhost:8000`. Swagger documentation is accessible at `http://localhost:8000/docs`.
+The API will be available at `http://localhost:8000`. Interactive OpenAPI documentation is accessible at `http://localhost:8000/docs`.
 
 ### 3. Frontend Setup
 
-In a new terminal window, navigate to the project root and install Node dependencies:
+In a separate terminal, navigate to the project root and install Node dependencies:
 
 ```bash
 # From project root
@@ -311,31 +331,31 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000` in your browser to view the application interface.
+Open `http://localhost:3000` in your web browser to access the user interface.
 
 ---
 
-## 11. Environment Variables
+## 13. Environment Variables
 
-The backend configuration relies on standard environment variables defined in `backend/.env`:
+Backend configurations are defined in `backend/.env`:
 
-| Environment Variable | Description | Default / Example |
+| Variable Name | Description | Default / Example |
 | :--- | :--- | :--- |
-| `PROJECT_NAME` | Name of the backend application | `"UNMASK AI"` |
-| `API_V1_STR` | Base prefix for API v1 endpoints | `"/api/v1"` |
-| `CORS_ORIGINS` | JSON list of permitted CORS frontend origins | `["http://localhost:3000"]` |
-| `TESSERACT_CMD` | Executable path to Tesseract OCR binary | `"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"` |
-| `AI_REASONING_PROVIDER` | Reasoning provider type (`"gemini"` or `"mock"`) | `"gemini"` |
-| `GEMINI_API_KEY` | Server-side Google Gemini API key | `"your_api_key_here"` |
+| `PROJECT_NAME` | Name of the backend service | `"UNMASK AI"` |
+| `API_V1_STR` | Base path for API v1 endpoints | `"/api/v1"` |
+| `CORS_ORIGINS` | Permitted CORS origins (JSON array string) | `["http://localhost:3000"]` |
+| `TESSERACT_CMD` | Path to the Tesseract OCR executable | `"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"` |
+| `AI_REASONING_PROVIDER` | AI provider implementation (`"gemini"` or `"mock"`) | `"gemini"` |
+| `GEMINI_API_KEY` | Google Gemini API key (server-side only) | `"your_api_key_here"` |
 
-> **Security Note**: Never commit `.env` files or API credentials to version control. The repository `.gitignore` explicitly ignores `.env` files.
+> **Security Reminder**: Never commit `.env` files or API credentials to public repositories. Version control rules in `.gitignore` ignore `.env` files automatically.
 
 ---
 
-## 12. API Documentation
+## 14. API Reference
 
 ### `GET /health`
-System operational health check and OCR engine status.
+Returns system operational status and OCR engine availability.
 
 **Response Example**:
 ```json
@@ -352,7 +372,7 @@ System operational health check and OCR engine status.
 ```
 
 ### `GET /api/v1/health/ocr`
-Dedicated OCR engine status diagnostics.
+Returns dedicated OCR engine status diagnostics.
 
 **Response Example**:
 ```json
@@ -368,9 +388,9 @@ Dedicated OCR engine status diagnostics.
 ### `POST /api/v1/scan`
 Uploads a document or screenshot for security signal extraction and verification analysis.
 
-* **Request Format**: `multipart/form-data`
-* **Form Field**: `file` (File object)
-* **Supported Formats**: `.pdf`, `.png`, `.jpg`, `.jpeg`
+* **Content-Type**: `multipart/form-data`
+* **Form Field**: `file` (Binary file)
+* **Supported Extensions**: `.pdf`, `.png`, `.jpg`, `.jpeg`
 
 **Response Example**:
 ```json
@@ -440,11 +460,11 @@ Uploads a document or screenshot for security signal extraction and verification
 
 ---
 
-## 13. Testing
+## 15. Testing
 
-The backend includes comprehensive test suites covering OCR diagnostics, document parsing, risk scoring, verification providers, and AI reasoning fallbacks.
+The backend suite includes unit and integration tests covering OCR diagnostic routines, document parsing, risk scoring, verification services, and AI fallback behavior.
 
-To run the backend test suite:
+To run the backend tests:
 
 ```bash
 cd backend
@@ -455,59 +475,53 @@ python -m pytest tests/
 
 ---
 
-## 14. Security & Privacy
+## 16. Security & Privacy
 
-* **Server-Side API Key Management**: Gemini API keys are processed strictly inside the FastAPI backend environment.
-* **Structured Data Transmission**: Only structured evidence data (extracted strings, flags, scores) is sent to external AI reasoning providers.
-* **Local Processing**: Document parsing, text extraction, OCR, and QR decoding occur locally on the server.
-* **Assistive System Scope**: UNMASK AI is designed as an assistive verification tool to inform user decisions and should not be relied upon as an absolute security authority.
-
----
-
-## 15. Current Limitations
-
-* **Demo Registry Scope**: Trusted organization identity checks depend on a local demo dataset (`trusted_organizations.json`).
-* **No Live Threat Intel Feeds**: External threat databases (such as VirusTotal or Google Safe Browsing APIs) are not currently integrated.
-* **No Live Voice / Deepfake Detection**: Audio and video analysis features are outside the current release scope.
-* **Neutral Handling of Unknown Entities**: Unknown contact numbers, domains, or entities are classified as `UNVERIFIED` rather than automatically malicious.
-* **Production Deployment Considerations**: Full production deployment requires adding rate limiting, persistent database storage, user authentication, and TLS termination.
+* **Server-Side Secret Management**: Gemini API keys are processed strictly on the FastAPI server and are never exposed to client browsers.
+* **Structured Data Transmission**: Only structured evidence data (extracted strings, verification flags, risk metrics) is transmitted to AI reasoning providers.
+* **Local Processing**: Document parsing, text extraction, OCR, and QR decoding occur within the local backend environment.
+* **Assistive System Scope**: UNMASK AI is designed as an assistive verification platform to aid user decision-making and should not be used as an absolute security authority.
 
 ---
 
-## 16. Future Roadmap
+## 17. Current Limitations
 
-* **External Threat Intelligence**: Integration with VirusTotal, Safe Browsing, and WHOIS domain age lookups.
-* **Expanded Trusted Organization Database**: Integration of global corporate and financial identity registries.
-* **Enhanced Domain Intelligence**: Advanced homograph and typosquatting detection algorithms.
-* **Advanced Document Inspection**: Layout analysis for detecting manipulated logos and typography anomalies.
-* **Deepfake & Voice Verification**: Future extension for analyzing incoming call audio and deepfake signatures.
-* **Production Enterprise Infrastructure**: Database persistence, user management, API rate limiting, and telemetry monitoring.
-* **Browser & Email Extensions**: Real-time verification popups for webmail interfaces.
+* **Demo Registry Dataset**: Identity verification relies on a local demo dataset (`trusted_organizations.json`).
+* **No Live Threat Intelligence Feeds**: External threat databases (such as VirusTotal or Google Safe Browsing APIs) are not currently integrated.
+* **No Live Voice / Deepfake Detection**: Audio and video analysis features are outside the current system release scope.
+* **Neutral Stance on Unknown Entities**: Unknown phone numbers, web domains, and entities are marked `UNVERIFIED` rather than automatically assumed malicious.
+* **Production Deployment Requirements**: Full enterprise deployment requires adding rate limiting, persistent database storage, user authentication, and TLS configuration.
 
 ---
 
-## 17. Demo Walkthrough
+## 18. Future Roadmap
 
-To experience the UNMASK AI workflow during evaluation:
+* **External Threat Intelligence**: Integration with VirusTotal, Safe Browsing, and WHOIS domain age lookup services.
+* **Scaled Organization Registry**: Integration with global identity databases and commercial registry APIs.
+* **Advanced Domain Intelligence**: Homograph and typosquatting detection algorithms.
+* **Advanced Visual Document Inspection**: Layout analysis for detecting manipulated logos and typography anomalies.
+* **Voice & Deepfake Verification**: Optional modules for analyzing audio files and call media.
+* **Enterprise Security Infrastructure**: Persistent storage, user access controls, API rate limiting, and audit logging.
+* **Browser & Webmail Extensions**: Real-time verification popups for web browser and email workflows.
+
+---
+
+## 19. Demo
+
+To evaluate the UNMASK AI workflow:
 
 $$\text{Upload Document} \longrightarrow \text{Extract Evidence} \longrightarrow \text{Detect Mismatches} \longrightarrow \text{Evaluate Risk} \longrightarrow \text{Gemini Explanation} \longrightarrow \text{Safer Action}$$
 
-1. Navigate to the **Scan** tab on the Next.js web application (`http://localhost:3000/scan`).
-2. Upload a sample document or image (e.g., a PDF notice claiming to be from "Northstar Financial").
-3. Observe real-time progress indicators during document parsing, OCR text extraction, and entity extraction.
-4. Review the **Risk Summary** banner, **Evidence Cards**, **Contact Verification Matrix**, and **Link Analysis Breakdown**.
-5. Read the **Gemini AI Explanation** for a non-technical synthesis of why the document was flagged.
-6. Follow the **Recommended Action** guidance before interacting with the communication.
+1. Open the **Scan** section in the web application (`http://localhost:3000/scan`).
+2. Upload a sample PDF or image notice (e.g., a document claiming to originate from "Northstar Financial").
+3. View real-time progress as document text is parsed, OCR is performed, and entities are extracted.
+4. Inspect the **Risk Summary**, **Evidence Cards**, **Contact Verification Matrix**, and **Link Analysis Breakdown**.
+5. Read the **Gemini AI Explanation** for an evidence-backed summary of the security signals.
+6. Review the **Recommended Action** before taking any action regarding the communication.
 
 ---
 
-## 18. Hackathon Project
-
-UNMASK AI was conceived and developed as a cybersecurity hackathon project to address modern digital impersonation and social-engineering risks through transparent, evidence-based verification.
-
----
-
-## 19. License
+## 20. License
 
 This project is licensed under the [MIT License](LICENSE).
 
