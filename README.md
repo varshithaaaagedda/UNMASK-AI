@@ -509,7 +509,7 @@ UNMASK AI was conceived and developed as a cybersecurity hackathon project to ad
 
 ## 19. License
 
-License: To be added.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
