@@ -1,0 +1,20 @@
+{
+  "Northstar Financial": {
+    "official_domains": [
+      "northstar.example"
+    ],
+    "official_phones": [
+      "+9118009876543",
+      "+91 1800 987 6543"
+    ]
+  },
+  "Acme Delivery": {
+    "official_domains": [
+      "acme-delivery.example"
+    ],
+    "official_phones": [
+      "+9118001112222",
+      "+91 1800 111 2222"
+    ]
+  }
+}

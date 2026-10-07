@@ -1,0 +1,17 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Next.js & Build Outputs
+.next/
+dist/
+out/
+build/
+*.log
